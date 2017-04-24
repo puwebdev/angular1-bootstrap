@@ -1,0 +1,119 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">Deposit AUD</div>
+                    <div class="panel-title-text">
+                        <p>We accept transfers from your linked Australian back account.</p>
+                        <p>To get started enter the required amount and choose your account from the list.</p>
+                        <p>Furthur instructions will be provided once submitted.</p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed" id="condensedTable" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Name</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">account</th>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">amount</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right p-r-60">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ff-lato">
+                                <tr>
+                                    <td class="v-align-middle semi-bold">BTC 123</td>
+                                    <td class="v-align-middle text-center">1f1taaaaaaaaaa</td>
+                                    <td class="v-align-middle text-center"> <input ng-model="deposite_aud_amount" required></td>
+                                                                       
+                                    <td class="v-align-middle text-right">
+                                        <button class="btn btn-success btn-cons btn-deposit" type="button" ng-click="btnDepositeClick()">
+                                            <i class="fa fa-arrow-up"></i><span class="bold">&nbspDeposit</span>
+                                        </button>                                  
+                                    </td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="table-detail" ng-style="table_detail_style">
+                            <div><p>Use the following details to finalise the request</p></div>
+                            <table>
+                                <tr>
+                                    <td><span>Account Name:</span></td>
+                                    <td><span>{{bankAccounts.label}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Account Number:</span></td>
+                                    <td><span>{{bankAccounts.account_name}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>BSB Number:</span></td>
+                                    <td><span>{{bankAccounts.account_number}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Reference:</span></td>
+                                    <td><span></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span>Amount:</span></td>
+                                    <td><span>{{bankAccounts.amount}}</span></td>
+                                </tr>
+                            </table>
+                            <div>
+                            <p>Please ensure the reference number matches exactly,</p>
+                            <p>otherwise there will be a delay in processing your request,</p>
+                            <p>We only accept deopsits from your linked bank account,</p>
+                            <p>any deposits from a third party account will be rejected.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">AUD Deposit History</div>
+                    <div class="drop-bitcoin m-r-20">
+                        <select class="cs-select cs-skin-slide" cs-select ng-model="t_option" ng-change="SelectOption()">
+                            <option value="AUD">Deposits</option>
+                            <option value="BTX">BTX</option>
+                        </select>
+                        <button class="btn btn-complete btn-cons btn-export" type="button">
+                            <i class="fa fa-share"></i><span class="bold">&nbspExport</span>
+                        </button>                          
+                    </div>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                        <a class="config" data-toggle="modal" href="#grid-config"></a>
+                        <a class="reload" href="javascript:;"></a>
+                        <a class="remove" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" id="depositaud-transfors-hist-table">
+                        <table ng-table="usersTable" class="table table-hover table-condensed" id="deposit-aud-hist-table" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Date</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Deposits</th>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in data">
+                                    <td><p>{{toDateReadable(item.created)}}</p></td>
+                                    <td><p>{{item.amount}}</p></td>
+                                    <td><p>{{item.status}}</p></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+</div>

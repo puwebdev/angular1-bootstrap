@@ -1,0 +1,22 @@
+{
+  "name": "boundle",
+  "homepage": "https://github.com/webcat12345/bitex2-altair",
+  "authors": [
+    "webcat12345 <webcat91@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-cookies": "^1.5.8",
+    "bootstrap-social": "^5.0.0"
+  }
+}

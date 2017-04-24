@@ -1,0 +1,136 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">
+                        <div>Withdraw BTC</div>
+                        
+                    </div>
+                    <div class="panel-title-text">
+                        <p>Select your account and enter the amount you would like to withdraw.</p>
+                        <p>(Withdrawals are processed instantly and usually take 24-48 hours to clear into your account)</p>
+                    </div>                      
+                    <div class="withdraw">
+                        <div class="withdraw-title">
+                            <p>Available Balance: {{available_balance_btc}} BTC</p>
+                        </div>
+                        <div class="withdraw-table">
+                            <table>
+                                <tr>
+                                    <td>BTC Address: </td>
+                                    <td><input ng-value="" ng-model="withdraw_btc_address"></td>
+                                </tr>
+                                <tr>
+                                    <td>Label(Optional): </td>
+                                    <td><input ng-value="" ng-model="withdraw_btc_label"></td>
+                                </tr>
+                                <tr>
+                                    <td>Amount: </td>
+                                    <td><input ng-value="" ng-model="withdraw_btc_amount"></td>
+                                </tr>
+                            </table>
+                            <div class="withdraw-action">
+                                <div>
+                                    <label>Save Address</label>
+                                    <input type="checkbox" ng-model="withdraw_address_save_check">
+                                </div>
+                                <div class="withdraw-button">
+                                    <button class="btn btn-success btn-cons btn-withdraw m-r-20"" type="button" ng-click="withdraw_btc_click()">
+                                        <i class="fa fa-arrow-up"></i><span class="bold">&nbspWithdraw</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <div class="panel-heading m-b-20">
+                            <div class="panel-title">Saved Addresses</div>
+                            <div class="drop-bitcoin m-r-20">    
+                                <button class="btn btn-complete btn-cons btn-add-new-address" type="button">
+                                    <i class="fa fa-plus-circle"></i><span class="bold">&nbspAdd New Address</span>
+                                </button>                          
+                            </div>
+                            <div class="tools">
+                                <a class="collapse" href="javascript:;"></a>
+                                <a class="config" data-toggle="modal" href="#grid-config"></a>
+                                <a class="reload" href="javascript:;"></a>
+                                <a class="remove" href="javascript:;"></a>
+                            </div>
+                        </div>
+                        <table class="table table-hover table-condensed" id="btc-withdraw-table" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left" style="width:20%">Name</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" style="width:40%">address</th>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left" style="width:20%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ff-lato">
+                                <tr ng-repeat="item in btc_addresses" ng-init="myIndex = $index">
+                                    <td class="v-align-middle text-left"></td>
+                                    <td class="v-align-middle text-left">{{item.btc_address}}</td>
+                                    <td class="v-align-middle text-left"> 
+                                        <button class="btn btn-success btn-cons btn-add-account m-r-20" type="button" ng-click="btcWithdrawClick([$index])">
+                                            <i class="fa fa-arrow-up"></i><span class="bold">&nbspWithdraw</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">BTC Withdrawal History</div>
+                    <div class="drop-bitcoin m-r-20">
+                        <select class="cs-select cs-skin-slide" cs-select ng-model="t_option" ng-change="SelectOption()">
+                            <option value="AUD">Deposits</option>
+                            <option value="BTX">BTX</option>
+                        </select>
+                        <button class="btn btn-complete btn-cons btn-export" type="button">
+                            <i class="fa fa-share"></i><span class="bold">&nbspExport</span>
+                        </button>     
+                    </div>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                        <a class="config" data-toggle="modal" href="#grid-config"></a>
+                        <a class="reload" href="javascript:;"></a>
+                        <a class="remove" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table ng-table="usersTable" class="table table-hover table-condensed" id="withdraw-btc-hist-table" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="width:20%">Date</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" style="width:20%">Address</th>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left" style="width:20%">Amount</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" style="width:40%;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in data">
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" ><p>{{toDateReadable(item.created)}}</p></td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" >{{item.address}}</td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" >{{item.amount}}</td>
+                                    <td class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" >{{item.status}}</td>
+                                </tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+</div>

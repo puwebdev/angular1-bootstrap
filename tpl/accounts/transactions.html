@@ -1,0 +1,128 @@
+<!-- START PAGE COVER -->
+<div class="container-fluid container-fixed-lg ">
+    <h3 class="page-title text-center">Accounts Transactions</h3>
+</div>
+<div class="container-fluid container-fixed-lg">
+    <!-- YOU CAN REMOVE .container-fixed-lg TO DISABLE THE FEATURE WHERE THE CONTENT
+                 ALIGNS TO THE CENTER WITHOUT STRECTHING UGLY ON 1800PX(1080P & 4/5K MONITORS) UP WORDS SCREEN
+                  -->
+    <!-- CONTENT GOES HERE-->
+    <div class="row">
+        <!-- START ACCOUNT INFO -->
+        <div class="col-md-12">
+            <div class="panel panel-transparent" style="margin-bottom: 0px">
+                <div class="panel-body">
+                    <div class="col-md-10">
+                        <label class="option-label l-float">Showing last 100 transactions for</label>
+                        <div class="input-group l-float">
+                            <span class="input-group-addon green-bar">
+                                <i class="fa fa-align-justify"></i>
+                            </span>
+                            <select class="form-control" style="width: 160px">
+                              <option value="volvo">Volvo</option>
+                              <option value="saab">Saab</option>
+                              <option value="opel">Opel</option>
+                              <option value="audi">Audi</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary btn-cons btn-animated btn-big">
+                            <span>Export</span>
+                        </button>
+                    </div>                
+
+                </div>
+            </div>
+        </div>
+        <!-- END ACCOUNT INFO -->    
+        <div class="col-md-6">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title"></div>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                        <a class="config" data-toggle="modal" href="#grid-config"></a>
+                        <a class="reload" href="javascript:;"></a>
+                        <a class="remove" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed" id="condensedTable" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <!-- NOTE * : Inline Style Width For Table Cell is Required as it may differ from user to user 
+                                        Comman Practice Followed
+                                        -->
+                                    <th style="width:30%">Date</th>
+                                    <th style="width:30%">Description</th>
+                                    <th style="width:30%">Money in</th>
+                                    <th style="width:50%">Money out</th>
+                                    <th style="width:50%">Balance</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="v-align-middle semi-bold">10/12/2016</td>
+                                    <td class="v-align-middle">Deposit/Withdrawal info</td>
+                                    <td class="v-align-middle">4000.00 CR</td>
+                                    <td class="v-align-middle"></td>
+                                    <td class="v-align-middle">2000.00 DR</td>
+                                </tr>
+                                <tr>
+                                    <td class="v-align-middle semi-bold">10/12/2016</td>
+                                    <td class="v-align-middle">Deposit/Withdrawal info</td>
+                                    <td class="v-align-middle">4000.00 CR</td>
+                                    <td class="v-align-middle"></td>
+                                    <td class="v-align-middle">2000.00 DR</td>
+                                </tr>
+                                <tr>
+                                    <td class="v-align-middle semi-bold">10/12/2016</td>
+                                    <td class="v-align-middle">Deposit/Withdrawal info</td>
+                                    <td class="v-align-middle">4000.00 CR</td>
+                                    <td class="v-align-middle"></td>
+                                    <td class="v-align-middle">2000.00 DR</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>            
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title"></div>
+                    <div class="tools">
+                        <a class="collapse" href="javascript:;"></a>
+                        <a class="config" data-toggle="modal" href="#grid-config"></a>
+                        <a class="reload" href="javascript:;"></a>
+                        <a class="remove" href="javascript:;"></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <label class="option-label col-md-12">Found: X Transactions</label>
+                    <br>
+                    <div class="col-md-6">
+                        <div class="m-t-30">
+                            <button type="button" class="btn btn-primary btn-cons m-r-25">
+                                <span>Next</span>
+                            </button>
+                            <button type="button" class="btn btn-primary btn-cons ">
+                                <span>Previous</span>
+                            </button>                            
+                        </div>            
+                    </div>                    
+                </div>
+            </div>            
+        </div>        
+    </div>    
+</div>

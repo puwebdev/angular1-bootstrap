@@ -1,0 +1,70 @@
+<!-- START JUMBOTRON -->
+<div class="jumbotron" data-pages="parallax">
+    <div class="container-fluid container-fixed-lg sm-p-l-20 sm-p-r-20">
+        <div class="inner">
+            <!-- START BREADCRUMB -->
+            <ul class="breadcrumb">
+                <li>
+                    <p>Accounts</p>
+                </li>
+                <li><a href="" class="active">Transfer</a>
+                </li>
+            </ul>
+            <!-- END BREADCRUMB -->
+        </div>
+        </div>
+    </div>
+</div>
+<!-- END JUMBOTRON -->
+<!-- START PAGE COVER -->
+<div class="container-fluid container-fixed-lg">
+    <!-- YOU CAN REMOVE .container-fixed-lg TO DISABLE THE FEATURE WHERE THE CONTENT
+                 ALIGNS TO THE CENTER WITHOUT STRECTHING UGLY ON 1800PX(1080P & 4/5K MONITORS) UP WORDS SCREEN
+                  -->
+    <!-- CONTENT GOES HERE-->
+    <!-- START PANEL -->
+    <div class="panel panel-transparent">
+        <div class="panel-heading">
+            <div class="panel-title">New Funds Transfer</div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <form id="form-work" class="form-horizontal" role="form" autocomplete="off" name="work" novalidate>
+                    <div class="form-group">
+                        <h3>1. From Account</h3>
+
+                        <label for="fname" class="col-sm-3 control-label">Select Account : </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" placeholder="Full name" name="name" ng-class="{'error': work.name.$invalid && !work.name.$pristine}" ng-model="work_.name" required>
+                        </div>
+                        <p>AVAILABLE BALANCE:<span>10 BTC</span></p>
+                    </div>
+                    <div class="form-group">
+                        <h3>2. To Account</h3>
+
+                        <label for="fname" class="col-sm-3 control-label">To Payee / Account : </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" placeholder="Full name" name="name" ng-class="{'error': work.name.$invalid && !work.name.$pristine}" ng-model="work_.name" required>
+                        </div>
+                        <p>OR</p>
+                        <label for="fname" class="col-sm-3 control-label">BTC Address : </label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fname" placeholder="Full name" name="name" ng-class="{'error': work.name.$invalid && !work.name.$pristine}" ng-model="work_.name" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p>I hereby certify that the information above is true and accurate. </p>
+                        </div>
+                        <div class="col-sm-9">
+                            <button class="btn btn-success" type="submit" ng-disabled="work.$invalid">Submit</button>
+                            <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- END PANEL -->  
+</div>
