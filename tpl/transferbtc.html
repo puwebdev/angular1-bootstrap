@@ -1,0 +1,66 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0 tranfer-btc-container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">
+                        <div>Transfer BTC</div>
+                        
+                    </div>
+                    <div class="panel-title-text">
+                        <p>To make a tranfer fill in the details below, the BTC address</p>
+                        <p>can be entered manually or selected from the address book.</p>
+                    </div>    
+                    <div class="panel-body">
+                        <div class="panel-title-text">
+                            <span class="bold"> Available Balance: {{available_balance_btc}} BTC </span>
+                        </div>             
+                        <div class="transfer-btc-panel address">
+                            <label class="transfer-btc-label bold">BTC Address</label>
+                            <input ng-model="btc_address" class="btc-address-input text-center">
+                            <div class="dropdown address-book-list">
+                                <button class="btn btn-complete dropdown-toggle address-book" type="button" data-toggle="dropdown"> <span class="bold">Address Book </span> <span class="caret"></span></button>
+                                <ul class="dropdown-menu m-t-10">
+                                  <li ng-repeat="item in btc_withdrawal_addresses" class="btc-addresses p-t-10 p-b-10"><span ng-click="addressClicked(item)"><span class="bold">{{item.label}} </span>({{item.address}})</span></li>
+                                  <li class="p-t-10 p-b-10"><i class="fa fa-plus-circle m-r-10"></i><span ui-sref="app.addressbook" class="bold">Add new address</span></li>
+                                </ul>
+                            </div>
+                        </div>                
+                        <div class="transfer-btc-panel amount">
+                            <label class="transfer-btc-label bold">Amount to transfer</label>
+                            <input ng-model="transfer_amount">
+                            <span class="text-btc bold">BTC</span>
+                        </div>
+                        <div>
+                            <span class="btn transfer-btc" ng-click="openTransferBtcModal()" ng-disabled="transfer_amount == '' || btc_address == ''"> <span class="bold">TRANSFER BTC </span></span>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="confirm-dialog-box-transparent-layer" ng-show="confirm_show">
+    <div class="confirm-dialog-box">
+        <div>
+            <span class="title bold">Confirm your transfer
+            <button type="button" class="close pull-right" aria-label="Close" ng-click="closeTransferBtcModal()">
+              <span aria-hidden="true">&times;</span>
+            </button></span>
+        </div>
+        <div class="panel">
+            <span class="amount-title"><label class="bold">Amount to Transfer</label></span>
+            <span class="amount-input"><label class="">{{transfer_amount}} BTC</span>
+            <span class="address-title"><label class="bold">BTC Address</label></span>
+            <span class="address-input"><label class="">{{btc_address}}</label></span>
+            <div class="panel-policy">
+                <input type="checkbox" ng-model="policy_checked" data-size="lg" class="large-checkbox">
+                <span class="confirm-text">I have verified the information and understand that all BTC Transfers are final</span>
+            </div>
+            <div class="panel-submit">
+                <button class="add-transfer-button btn btn-success" ng-disabled="!policy_checked" ng-click="transferBTC()"><span class="bold">TRANSFER {{transfer_amount}} BTC</span></button>
+            </div>
+        </div>
+    </div>
+</div>
