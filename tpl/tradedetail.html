@@ -1,0 +1,82 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0" id="trade-detail-container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">Trade Details</div>
+                    <div class="panel-title-text">
+                        <p>Here you can find information on your current open orders as well as your previous trades histroy.</p>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <div>
+                            <p class="orders-count">Total Open orders:&nbsp;&nbsp;<span>{{orders.length}}</span></p>
+                        </div>
+                        <table class="table table-hover table-condensed" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="date-field text-left">Date</th>
+                                    <th class="type-field text-center">Type</th>
+                                    <th class="amount-field text-center">Amount</th>
+                                    <th class="price-field text-center">Price</th>
+                                    <th class="remaining-amount-field text-center">Remaining Amount</th>
+                                    <th class="action-field text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="ff-lato">
+                                <tr ng-repeat="item in orders">
+                                    <td class="text-left">{{toDateReadable(item.created)}}</td>
+                                    <td class="text-center">{{item.direction}}</td>
+                                    <td class="text-center">{{item.amount}}</td>
+                                    <td class="text-center">{{(item.price)}} BTC</td>
+                                    <td class="text-center">{{item.remaining_amount}}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-danger btn-sm" ng-click="deleteOrder(item.id)"><span class="bold">Cancel</span></button>
+                                    </td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">Trades History</div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" id="trade-detail-hist-table">
+                        <table ng-table="tradesTable" class="table table-hover table-condensed" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="date-field text-left">Date</th>
+                                    <th class="type-field text-center">Type</th>
+                                    <th class="amount-field text-center">Amount</th>
+                                    <th class="price-field text-center">Price</th>
+                                    <th class="remaining-amount-field text-center">Volume</th>
+                                    <th class="action-field text-center">Fee</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in tradeData">
+                                    <td class="text-left">{{toDateReadable(item.created)}}</td>
+                                    <td class="text-center">{{item.direction}}</td>
+                                    <td class="text-center">${{toPriceString(item.bc_amount)}}</td>
+                                    <td class="text-center">${{toPriceString(item.price)}}</td>
+                                    <td class="text-center">${{toPriceString(item.qc_amount)}}</td>
+                                    <td class="text-center">${{toPriceString(item.qc_fee)}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>  
+</div>
