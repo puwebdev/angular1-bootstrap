@@ -56,13 +56,14 @@ angular.module('app', ['ngTable'])
 					return num;
 				}
 			};
-// change date string to human readable
-			$scope.toDateReadable = function (dateString) {
-				let dateObj = new Date(dateString);
-				let monthNames = ["January", "February", "March", "April", "May", "June"
-					, "July", "August", "September", "October", "November", "December"];
-				let temp = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate() + ' ' + to2(dateObj.getHours()) + ':' 
-					+ to2(dateObj.getMinutes()) + ':' + to2(dateObj.getSeconds());
-				return temp;
-			};
+
+        // change date string to human readable
+            $scope.toDateReadable = function (dateString) {
+                let dateObj = new Date(dateString);
+                let monthNames = ["January", "February", "March", "April", "May", "June"
+                    , "July", "August", "September", "October", "November", "December"];
+                let temp = to2(dateObj.getHours()) + ':' 
+                    + to2(dateObj.getMinutes()) + ':' + to2(dateObj.getSeconds()) + ' ' + dateObj.getDate() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getFullYear();
+                return temp;
+            };
     }]);
