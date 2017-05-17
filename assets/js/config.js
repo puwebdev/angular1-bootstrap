@@ -66,8 +66,7 @@ angular.module('app')
                                     'rickshaw',
                                     'sparkline',
                                     'public_apis',
-                                    'private_apis',
-                                    'dataTables'
+                                    'private_apis'
                                 ], {
                                     insertBefore: '#lazyload_placeholder'
                                 })
@@ -164,7 +163,7 @@ angular.module('app')
                         }
                     })
                 .state('app.pageone', {
-                    url: '/pageone',
+                    url: '/depositaud',
                     templateUrl: 'tpl/pageone.html',
                     controller: 'PageoneCtrl',
                     resolve: {
@@ -265,8 +264,34 @@ angular.module('app')
                     }
                 })
 
+                .state('app.buybtc', {
+                    url: '/buybtc',
+                    templateUrl: 'tpl/buybtc.html',
+                    controller: 'BuyBTCCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'sparkline',
+                                    'public_apis',
+                                    'private_apis',
+                                    'dataTables'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/buybtc.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+
                 .state('app.sellbtcnew', {
-                    url: '/sellbtcnew',
+                    url: '/sellbtc',
                     templateUrl: 'tpl/sellbtcnew.html',
                     controller: 'SellBTCNew',
                     resolve: {
@@ -285,6 +310,84 @@ angular.module('app')
                                 .then(function() {
                                     return $ocLazyLoad.load([
                                         'assets/js/controllers/sellbtcnew.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+
+                .state('app.tradedetail', {
+                    url: '/tradedetail',
+                    templateUrl: 'tpl/tradedetail.html',
+                    controller: 'TradeDetail',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'sparkline',
+                                    'public_apis',
+                                    'private_apis',
+                                    'dataTables'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/tradedetail.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+
+                .state('app.addressbook', {
+                    url: '/addressbook',
+                    templateUrl: 'tpl/addressbook.html',
+                    controller: 'AddressBookCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'sparkline',
+                                    'public_apis',
+                                    'private_apis',
+                                    'dataTables'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/addressbook.js'
+                                    ]);
+                                });
+                        }]
+                    }
+                })
+
+                .state('app.transferbtc', {
+                    url: '/transferbtc',
+                    templateUrl: 'tpl/transferbtc.html',
+                    controller: 'TransferBTCCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                    'nvd3',
+                                    'mapplic',
+                                    'rickshaw',
+                                    'sparkline',
+                                    'public_apis',
+                                    'private_apis',
+                                    'dataTables'
+                                ], {
+                                    insertBefore: '#lazyload_placeholder'
+                                })
+                                .then(function() {
+                                    return $ocLazyLoad.load([
+                                        'assets/js/controllers/transferbtc.js'
                                     ]);
                                 });
                         }]

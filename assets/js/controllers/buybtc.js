@@ -3,7 +3,7 @@
 /* Controllers */
 
 angular.module('app')
-    .controller('SellBTCNew', [
+    .controller('BuyBTCCtrl', [
     	'$scope',
     	'$timeout',
     	'$http',
@@ -13,7 +13,6 @@ angular.module('app')
     		var orderbook = {};
     		var aud_commision_rate = 0;
     		var item = {};
-    		var max_price = 0;
 
     		$scope.subtotal = 0;
 			$scope.fee = 0;
@@ -44,15 +43,6 @@ angular.module('app')
 	    		private_apis.GetBalance(function (data) {
 	    			if (data) {
 	    				$scope.available_balance_aud = data.available.AUD;
-	    				$scope.available_balance_btc = data.available.BTC;
-	    			}
-	    		});
-
-	    	/// Get BTC-AUD Bids
-	    		private_apis.GetBABids(function (res) {
-	    			if (res.res_status) {
-	    				var prices = res.data.results.map(function(a) {return a.price;});
-	    				max_price = Math.max.apply(null, prices)
 	    			}
 	    		});
 			}
@@ -62,16 +52,16 @@ angular.module('app')
     	/// Buy BTC button clicked
     		$scope.btnBuyBTCClicked = function() {    			
 				if ($scope.oder_type == 1) {
-    				var amount = $scope.audspend / 100 * (100 - aud_commision_rate) / max_price;
+    				var amount = $scope.audspend / 100 * (100 - aud_commision_rate) / orderbook.price;
     				item = {
-					    "direction": 20,
-					    "price": max_price * 0.99,
-					    "amount": $scope.audspend,
+					    "direction": 10,
+					    "price": orderbook.price * 1.01,
+					    "amount": parseFloat(amount).toFixed(8),
 					    "ephemeral": true
 					};
 				} else {
 					item = {
-						"direction": 20,
+						"direction": 10,
 					    "price": $scope.buyprice,
 					    "amount": $scope.audspend,
 					    "ephemeral": false
@@ -80,9 +70,13 @@ angular.module('app')
 				console.log(item);
 				private_apis.AddOrder(item, function(res) {
 					if (res.res_status) {
-                        var options = {style: "simple", message: $scope.oder_type == 1 ? "BTC Successfully sold" : "Order successfully placed", type: "success", timeout: 0};
-                        jQuery('body').pgNotification(options).show();
 						updateData();
+						var msg = 'BTC Successfully bought';
+						if ($scope.oder_type == 2) {
+							msg = "Order successfully placed";
+						}
+                        var options = {style: "simple", message: msg, type: "success", timeout: 0};
+                        jQuery('body').pgNotification(options).show();
 					} else {
                         var options = {style: "simple", message: res.data[Object.keys(res.data)[0]], type: "error", timeout: 0};
                         jQuery('body').pgNotification(options).show();
@@ -92,10 +86,11 @@ angular.module('app')
 
     		$scope.calcOrder = function() {
     			if ($scope.oder_type == 1) {
-    				var amount = $scope.audspend / 100 * (100 - aud_commision_rate) / max_price;
-    				$scope.subtotal = $scope.audspend * max_price;
+    				var amount = $scope.audspend / 100 * (100 - aud_commision_rate) / orderbook.price;
+
+    				$scope.subtotal = $scope.audspend / 100 * (100 - aud_commision_rate);
     				$scope.fee = aud_commision_rate;
-    				$scope.amountToReceive = $scope.subtotal / 100 * (100 - $scope.fee) ;
+    				$scope.amountToReceive = amount;
     			} else {
     				$scope.subtotal = $scope.audspend * $scope.buyprice;
     				$scope.fee = aud_commision_rate;
@@ -116,6 +111,10 @@ angular.module('app')
 					return '0.00';
 				}
 			};
+
+			$scope.toBTCFormat = function (price) {
+				return parseFloat(price).toFixed(8);
+			}
 
 		// change date string to human readable
 			$scope.toDateReadable = function (dateString) {
