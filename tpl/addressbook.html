@@ -1,0 +1,95 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0 address-book-containter">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <div>Address Book</div>
+                    </div>
+                    <div class="panel-title-text">
+                        <p>Add and Manage your Addresses</p>
+                    </div>   
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-condensed" id="addressbook-table" ui-options="table_options">
+                            <tbody class="ff-lato">
+                                <tr>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <label>BTC Address: </label>
+                                    </td>
+                                    <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <input ng-model="btc_address">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                        <label>Name: </label>
+                                    </td>
+                                    <td class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                        <input ng-model="btc_address_name">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xs-7 col-sm-7 col-md-7 col-lg-7" colspan="2">
+                                        <button ng-click="addAddress()" class="btn btn-success pull-left">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span class="bold">Add Address</span>
+                                        </button>
+                                    </td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">Saved Addresses</div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" id="saved-addresses-table">
+                        <table class="table table-hover table-condensed" id="saved-addresses-list" ui-options="table_options">                 
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-left">Name</th>
+                                    <th class="col-xs-7 col-sm-7 col-md-7 col-lg-7 text-center">Address</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in btc_withdrawal_addresses" ng-form="rowForm" demo-tracked-table-row="row">
+                                    <td title="'Name'" ng-switch="row.isEditing" ng-class="label.$dirty ? 'bg-warning' : ''" ng-form="label" demo-tracked-table-cell>
+                                        <span ng-switch-default class="editable-text">{{row.label}}</span>
+                                        <div class="controls" ng-class="label.$invalid && label.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                                          <input type="text" name="label" ng-model="row.label" class="editable-input form-control input-sm" required/>
+                                        </div>
+                                    </td>
+                                    
+                                    <td title="'Address'" ng-switch="row.isEditing" ng-class="address.$dirty ? 'bg-warning' : ''" ng-form="address" demo-tracked-table-cell>
+                                        <span ng-switch-default class="editable-text">{{row.address}}</span>
+                                        <div class="controls" ng-class="address.$invalid && address.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                                          <input type="text" name="address" ng-model="row.address" class="editable-input form-control input-sm" required/>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" ng-click="save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
+                                        <button class="btn btn-default btn-sm" ng-click="cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                                        <button class="btn btn-danger btn-sm" ng-click="del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+</div>

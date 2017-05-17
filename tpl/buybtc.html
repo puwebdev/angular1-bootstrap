@@ -1,0 +1,100 @@
+<!--  START CONTAINER FLUID -->
+<div class="container-fluid sm-padding-10 sm-gutter p-l-25 p-r-25 p-b-25 p-t-0 btc-sell-new">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-heading m-b-20">
+                    <div class="panel-title">
+                        <div>How much would you like to spend?</div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="available-balance">
+                        <p>Available Balance: ${{toPriceString(available_balance_aud)}}</p>
+                    </div>
+                    <div class="order-type">
+                        <p>Order Type <i class="fa fa-question-circle"></i></p>
+                        <div ng-init="oder_type=1">
+                            <input type="radio" name="group1" id="r1" value="1" ng-model="oder_type"  ng-change="calcOrder()"/><label for="r1">Instant</label>
+                            <input type="radio" name="group1" id="r2" value="2" ng-model="oder_type"  ng-change="calcOrder()"/><label for="r2">Limit</label>
+                        </div>
+                    </div>
+                    <div class="amount amount-to-buy">
+                        <p>{{ oder_type == 1 ? "Amount to spend" : "Amount to Buy" }}</p>
+                        <div>
+                            <input type="text" type="number" value="" ng-model="audspend" ng-change="calcOrder()"/>
+                            <button class="btn btn-complete" disabled="true">{{ oder_type == 1 ? "AUD" : "BTC" }}</button>
+                        </div>
+                    </div>
+                    <div class="amount amount-per-btc" ng-show="oder_type == 2">
+                        <p>Buy Price</p>
+                        <div>
+                            <input type="text" ng-model="buyprice" ng-disabled="oder_type == 1 ? 'all' : ''"  ng-change="calcOrder()"/>
+                            <button class="btn btn-complete" disabled="true">AUD</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-condensed table-sell-new-btc">
+                            <tr>
+                                <td>Subtotal:</td>
+                                <td>${{toPriceString(subtotal)}} AUD</td>
+                            </tr>
+                            <tr>
+                                <td>Digital Surge Fee</td>
+                                <td>{{fee}}%</td>
+                            </tr>
+                            <tr>
+                                <td>{{ oder_type == 1 ? "Approx.BTC" : "Total" }}:</td>
+                                <td>{{ oder_type == 1 ? toBTCFormat(amountToReceive) : "$" + toPriceString(amountToReceive)}}</td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-success btn-buy-btc" ng-click="btnBuyBTCClicked()">BUY BTC</button>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="row btc-sell-new-order-list">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+            <div class="panel panel-transparent">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <p>BUY ORDERS</p>
+                        <table class="table table-hover table-condensed table-sell-new-btc-buy-order-list">
+                            <thead>
+                                <th>PRICE</th>
+                                <th>VOLUME</th>
+                                <th>VALUE</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${{toPriceString(1000)}} AUD</td>
+                                    <td>${{toPriceString(12000)}} BTC</td>
+                                    <td>${{toPriceString(12000)}} AUD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive">
+                        <p>SELL ORDERS</p>
+                        <table class="table table-hover table-condensed table-sell-new-btc-sell-order-list">
+                            <thead>
+                                <th>PRICE</th>
+                                <th>VOLUME</th>
+                                <th>VALUE</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${{toPriceString(1000)}} AUD</td>
+                                    <td>${{toPriceString(12000)}} BTC</td>
+                                    <td>${{toPriceString(12000)}} AUD</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>    
+</div>

@@ -65,9 +65,11 @@ angular.module('app')
 
                 api_sender.sendApiRequest('POST', server_url + api_url, data).then(
                     function(res) {
-                        callback(true);
+                        res.status = true;
+                        callback(res);
                     }, function(res) {
-                        callback(false);
+                        res.status = false;
+                        callback(res);
                     }
                 );
             }
@@ -78,9 +80,11 @@ angular.module('app')
 
                 api_sender.sendApiRequest('GET', server_url + api_url).then(
                     function(res) {
+                        res.getStatus = true;
                         callback(res.data);
                     }, function(res) {
-                        callback(false);
+                        res.getStatus = false;
+                        callback(res);
                     }
                 );
             };
@@ -97,12 +101,16 @@ angular.module('app')
                 );
             }
 
-            self.AddAUDWithdraw = function (data) {
+            self.AddAUDWithdraw = function (data, callback) {
                 var api_url = 'api/private/aud-withdrawals/';
 
                 api_sender.sendApiRequest('POST', server_url + api_url, data).then(
                     function(res) {
+                        res.getStatus = true;
+                        callback(res);
                     }, function(res) {
+                        res.getStatus = false;
+                        callback(res);
                     }
                 );
             }
@@ -134,13 +142,68 @@ angular.module('app')
             }
         // get btc address list
             self.GetBTCAddressTable = function (callback) {
-                var api_url = 'api/private/btc-addresses/';
+                var api_url = 'api/private/btc-deposit-addresses/';
 
                 api_sender.sendApiRequest('GET', server_url + api_url).then(
                     function(res) {
                         callback(res.data);
                     }, function(res) {
                         callback(false);
+                    }
+                );
+            }
+
+        // get btc withdrawal address book 
+            self.GetBTCWithdrawalAddress = function (callback) {
+                var api_url = 'api/private/btc-withdrawal-address-book/';
+
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        res.getStatus = true;
+                        callback(res);
+                    }, function(res) {
+                        res.getStatus = false;
+                        callback(res);
+                    }
+                );
+            }
+
+            self.GetBTCWithdrawalAddressWithPage = function(page, callback) {
+                var api_url = 'api/private/btc-withdrawal-address-book/';
+
+                api_sender.sendApiRequest('GET', server_url + api_url + '?page=' + page).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }
+                );
+            }
+
+            self.DeleteBTCWithdrawalAdressWithId = function(id, callback) {
+                var api_url = 'api/private/btc-withdrawal-address-book/' + id + '/';
+
+                api_sender.sendApiRequest('DELETE', server_url + api_url).then(
+                    function(res) {
+                        res.getStatus = true;
+                        callback(res);
+                    }, function(res) {
+                        res.getStatus = false;
+                        callback(res);
+                    }
+                );
+            }
+
+            self.addWithdrawalAddress = function (data, callback) {
+                var api_url = 'api/private/btc-withdrawal-address-book/';
+
+                api_sender.sendApiRequest('POST', server_url + api_url, data).then(
+                    function(res) {
+                        res.getStatus = true;
+                        callback(res);
+                    }, function(res) {
+                        res.getStatus = false;
+                        callback(res);
                     }
                 );
             }
@@ -175,9 +238,11 @@ angular.module('app')
 
                 api_sender.sendApiRequest('POST', server_url + api_url, data).then(
                     function(res) {
-                        callback(true);
+                        res.getStatus = true;
+                        callback(res);
                     }, function(res) {
-                        callback(false);
+                        res.getStatus = false;
+                        callback(res);
                     }
                 );
             }
@@ -242,6 +307,124 @@ angular.module('app')
                         callback(false);
                     }
                 );
+            }
+
+        // get btc-wallet-transactions
+            self.GetBTCWalletTransaction = function (callback) {
+                var api_url = 'api/private/btc-wallet-transactions/';
+                
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }    
+                );
+            }
+
+            self.GetBTCWalletTransactionWithPage = function(page, callback) {
+                var api_url = 'api/private/btc-wallet-transactions/';
+
+                api_sender.sendApiRequest('GET', server_url + api_url + '?page=' + page).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }
+                );
+            }
+
+        // get orders
+            self.GetOrders = function (callback) {
+                var api_url = 'api/private/orders/?status=20';
+
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }
+                );
+            };
+
+            self.AddOrder = function (item, callback) {
+                var api_url = 'api/private/orders/?status=20';
+
+                api_sender.sendApiRequest('POST', server_url + api_url, item).then(
+                    function(res) {
+                        res.res_status = true;
+                        callback(res);
+                    }, function(res) {
+                        res.res_status = false;
+                        callback(res);
+                    }
+                );
+            };
+
+            self.GetOrdersWithPage = function(page, callback) {
+                var api_url = 'api/private/orders/?status=20';
+
+                api_sender.sendApiRequest('GET', server_url + api_url + '?page=' + page).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }
+                );
+            }
+
+            self.DeleteOrderWithId = function(id, callback) {
+                var api_url = 'api/private/orders/'+ id + '/';
+
+                api_sender.sendApiRequest('DELETE', server_url + api_url).then(
+                    function(res) {
+                        callback(res.data);
+                    }, function(res) {
+                        callback(false);
+                    }
+                );
+            }
+        /// sell btc page
+            // get orderbook
+            self.GetOrderBook = function(callback) {
+                var api_url = 'api/public/orderbook/btc-aud/asks/';
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        res.res_status = true;
+                        callback(res);
+                    }, function(res) {
+                        res.res_status = false;
+                        callback(res);
+                    }
+                );  
+            }
+
+            // get profile
+            self.GetProfile = function(callback) {
+                var api_url = 'api/private/profile/';
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        res.res_status = true;
+                        callback(res);
+                    }, function(res) {
+                        res.res_status = false;
+                        callback(res);
+                    }
+                );  
+            }
+
+            // get btc-aud bids
+            self.GetBABids = function(callback) {
+                var api_url = 'api/public/orderbook/btc-aud/bids/';
+                api_sender.sendApiRequest('GET', server_url + api_url).then(
+                    function(res) {
+                        res.res_status = true;
+                        callback(res);
+                    }, function(res) {
+                        res.res_status = false;
+                        callback(res);
+                    }
+                );                  
             }
         }
     ])

@@ -1888,6 +1888,8 @@ body.rtl [class*="col-"] {
 }
 .panel .panel-heading .panel-title-text {
   margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
 }
 .panel .panel-heading .panel-title-text p {
   margin: 0px;
@@ -13841,11 +13843,13 @@ Main components
   margin-right: 5px;
 }
 .drop-bitcoin {
+  width: calc(100% - 180px);
   float: right;
 }
 .drop-bitcoin button.btn {
   padding-left: 5px;
   padding: 0px 12px;
+  display: none;
 }
 .drop-bitcoin div.cs-skin-slide {
   margin-right: 5px;
@@ -13940,51 +13944,35 @@ table th .address {
 }
 
 #withdrawaud-transfer-hist-table {
-  width: 50% !important;
+  max-width: 350px;
 }
 
-#deposit-aud-hist-table {
-  width: 50%;
-}
-
-#deposit-aud-hist-table th:nth-child(1) {
-  width: 40% !important;
-}
-
-#deposit-aud-hist-table th:nth-child(2) {
-  width: 30% !important;
-}
-
-#deposit-aud-hist-table th:nth-child(3) {
-  width: 30% !important;
+#deposit-aud-hist-table, #depositaud-transfors-hist-table {
+  max-width: 450px;
 }
 
 #deposit-btc-address-table {
-  width: 60% !important;
-}
-
-#deposit-btc-table-head th:nth-child(1) {
-  width: 15% !important;
-}
-
-#deposit-btc-table {
-  width: 100% !important;
+  width: 400px;
 }
 
 #deposit-btc-table th:nth-child(1) {
-  width: 15% !important;
+  width: 170px;
 }
 
 #deposit-btc-table th:nth-child(2) {
-  width: 10% !important;
+  width: 160px;
 }
 
 #deposit-btc-table th:nth-child(3) {
-  width: 30% !important;
+  
 }
 
 #deposit-btc-table th:nth-child(4) {
-  width: 30% !important;
+  
+}
+
+.container-fluid.deposit-btc .panel-body {
+  max-width: 1250px;
 }
 
 #btc-withdraw-table input{
@@ -13993,6 +13981,15 @@ table th .address {
 
 #whithdraw-aud-account input {
   width: 100% !important;
+  max-width: 70px;
+}
+
+#whithdraw-aud-account .action {
+  width: 145px;
+}
+
+#whithdraw-aud-account {
+  max-width: 900px;
 }
 
 #withdraw-btc-hist-table th:nth-child(1) {
@@ -14100,4 +14097,398 @@ table th .address {
 
 .btc-sell-new-order-list .panel .panel-body .table-responsive * {
   text-align: center;
+}
+
+.table-responsive {
+  overflow: hidden;
+}
+
+.ng-table-counts button {
+  font-size: 13px;
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+}
+
+
+#trade-detail-container .trade-page-title .panel-title {
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  display: inline;
+  letter-spacing: 0.02em;
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-stroke: 0px;
+  filter: alpha(opacity=40);
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.popup-diag {
+  width: 100%;
+  height: 100%;
+  background-color: #a001;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.popup-diag >div {
+    position: fixed;
+    left: calc(50% - 100px);
+    top: calc(50% - 250px);
+    background: #aaa;
+    padding: 30px !important;
+    z-index: 100;
+    background: white;
+    margin: 0 auto;
+    max-width: 650pt;
+    padding-top: 15pt;
+    padding-right: 15pt;
+    padding-bottom: 15pt;
+    padding-left: 15pt;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-border-radius: 3pt;
+    -moz-border-radius: 3pt;
+    border-radius: 3pt;
+}
+
+.export-buttons {
+  width: 300px;
+  display: inline;
+  float: right;
+}
+
+.export-buttons i {
+  font-size: 30px;
+  float: right;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#overview-transaction-table-pdf {
+  position: fixed;
+  top: 10000px;
+}
+
+#overview-transaction-table-excel {
+  position: fixed;
+  top: 10000px;
+}
+
+#deposit-aud-table-one {
+  max-width: 450px;
+}
+
+.address-book-containter table {
+  max-width: 600px;
+}
+
+#saved-addresses-table {
+  max-width: 600px;
+}
+
+.transfer-btc-label {
+  display: block;
+  color: rgb(0, 200, 255);
+  margin-bottom: 0px;
+}
+
+.tranfer-btc-container .transfer-btc-panel {
+  margin-bottom: 15px;
+}
+
+.tranfer-btc-container .transfer-btc-panel input {
+  height: 32px;
+  font-size: 12px;
+  width: 100px;
+}
+
+.tranfer-btc-container .panel-body {
+  padding: 0;
+}
+
+.address-book-list {
+  display: inline;
+}
+
+.address-book-list .dropdown-menu {
+  padding: 10px 10px 10px 10px;
+  color: black;
+  width: 480px;
+  font-size: 14px;
+}
+
+.address-book-list .dropdown-menu span {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.address-book-list .dropdown-menu i {
+  font-family: FontAwesome;
+  color: rgb(0, 190, 165);
+  vertical-align: middle;
+  font-size: 20px;
+}
+
+.address-book-list .dropdown-menu span:hover {
+  color: red;
+}
+
+.transfer-btc-panel.address input {
+  width: 300px;
+  font-size: 12px;
+}
+
+.text-btc {
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  margin-bottom: 0;
+  border: 1px solid #f0f0f0;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  background-image: none !important;
+  color: #626262;
+  background-color: #fff;
+  text-shadow: none;
+  box-shadow: none;
+  line-height: 21px;
+  padding-left: 17px;
+  padding-right: 17px;
+  position: relative;
+  transition: color 0.1s linear 0s, background-color 0.1s linear 0s, opacity 0.2s linear 0s !important;
+  display: inline-block;
+  padding: 6px 12px;
+  touch-action: manipulation;
+
+  color: #fff;
+  background-color: #48b0f7;
+  border-color: #48b0f7;
+  height: 32px;
+  border-radius: 0;
+}
+
+.transfer-btc-panel.amount input, .transfer-btc-panel.amount span {
+  float: left;
+}
+
+.transfer-btc-panel.amount {
+  height: 65px;
+}
+
+.confirm-dialog-box-transparent-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: rgba(0,0,0, 0.3);
+  top: -300px;
+  left: -300px;
+  z-index: 40;
+}
+
+span.transfer-btc {
+  background-color: rgb(0, 190, 165);
+  border-color: rgb(0, 190, 165);
+  color: white;
+}
+
+.confirm-dialog-box {
+  position: fixed;
+  width: 500px;
+  height: 430px;
+  left: calc(50% - 250px);
+  top: calc(50% - 270px);
+  background: white;
+  border-radius: 10px;
+  z-index: 10;
+  text-align: center;
+  background: #48b0f7;
+}
+
+.confirm-dialog-box span {
+  display: block;
+}
+
+.confirm-dialog-box .panel {
+  height: calc(100% - 70px);
+  border-radius: 10px;
+}
+
+.confirm-dialog-box .title {
+  height: 80px;
+  font-size: 30px;
+  padding: 30px;
+  color: white;
+}
+
+.confirm-dialog-box .panel .amount-title label {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #48b0f7;
+  font-size: 20px;
+}
+
+.confirm-dialog-box .panel .amount-input label {
+  font-size: 16px;  
+  border-bottom: 3px solid #48b0f7;
+}
+
+.confirm-dialog-box .panel .address-title label {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #48b0f7;
+  font-size: 20px;
+}
+
+.confirm-dialog-box .panel .address-input label {  
+  font-size: 16px;
+  border-bottom: 3px solid #48b0f7;
+  margin-bottom: 30px;
+}
+
+.confirm-dialog-box .panel .panel-policy {
+  padding: 30px;
+}
+
+.confirm-dialog-box .panel .panel-submit {
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+
+.confirm-dialog-box .panel .panel-policy p {
+  font-size: 16px;
+  display: contents;
+}
+
+#overview-add-bank {
+  width: 170px;
+}
+
+.highlight td {
+  background-color: #c0e9f2 !important;
+}
+
+.drop-bitcoin .dropdown-item {
+  width: 100px;
+  height: 25px;
+}
+
+.overview-transaction-table .dropdown-menu {
+  width:  160px;
+}
+
+.date-field {
+  width: 150px;
+}
+
+.type-field {
+  width: 80px;
+}
+
+.amount-field {
+  width: 140px;
+}
+
+.price-field {
+  width: 140px;
+}
+
+.remaining-amount-field {
+  width: 165px;
+}
+
+.action-field {
+  width: 100px;
+}
+
+#trade-detail-container .panel {
+  width: 1000px;
+}
+
+#trade-detail-container th, td {
+  padding: 10px;
+}
+
+#trade-detail-container th {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#trade-detail-container td button {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.tranfer-btc-container *, .confirm-dialog-box-transparent-layer * {  
+  font-family: 'Montserrat';
+}
+
+.btc-address-input {
+  float: left;
+}
+
+.btn.address-book {
+  border-radius: 0;
+  height: 32px;
+}
+
+.confirm-dialog-box-transparent-layer .close {
+  font-size: 30px;
+}
+
+.confirm-dialog-box-transparent-layer .large-checkbox {
+  height: 40px;
+  font-size: 30px;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  left: 90px;
+  -ms-transform: scale(2);
+  -moz-transform: scale(2);
+  -webkit-transform: scale(2);
+  -o-transform: scale(2);
+}
+
+.confirm-dialog-box-transparent-layer .confirm-text {
+  display: block;
+  width: 350px;
+  float: right;
+  font-size: 15px;
+  text-align: left;
+}
+
+li.btc-addresses {
+  border-bottom: 1px solid #bbb;
+}
+
+.confirm-dialog-box.deposit-aud .panel-title {
+  height: 100px;
+}
+
+.confirm-dialog-box.deposit-aud .panel-title .title {
+  width: 500px;
+  line-height: 30px;
+}
+
+.confirm-dialog-box.deposit-aud .panel .table-detail {
+  height: 350px;
+  border-radius: 10px;
 }

@@ -5,8 +5,8 @@
             <div class="panel panel-transparent">
                 <div class="panel-heading m-b-20">
                     <div class="panel-title">Accounts Overview</div>
-                    <button class="btn btn-complete btn-cons btn-add-account" type="button">
-                        <i class="fa fa-plus-circle"></i><span class="bold">&nbspAdd Account</span>
+                    <button class="btn btn-complete btn-cons btn-add-account" type="button" id="overview-add-bank" ui-sref="app.addressbook">
+                        <i class="fa fa-plus-circle"></i><span class="bold">&nbspAdd Bank Account</span>
                     </button>  
                     <div class="tools">
                         <a class="collapse" href="javascript:;"></a>
@@ -24,36 +24,37 @@
                                     <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center">Currency</th>
                                     <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Available Balance</th>
                                     <th class="col-xs-3 col-sm-3 col-md-3 col-lg-3 text-center">Total Balance</th>
-                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right p-r-60">Actions</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right p-r-60" style="width: 200px">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="ff-lato">
-                                <tr>
+                                <tr class="{{ (t_option == 'BTX') ? 'highlight': '' }}" ng-click="t_option = 'BTX'; transaction_type_change()">
                                     <td class="v-align-middle semi-bold">Bitcoin</td>
-                                    <td class="v-align-middle text-center">BTX</td>
+                                    <td class="v-align-middle text-center">BTC</td>
                                     <td class="v-align-middle text-center">{{account_info.balance.available.BTC}}</td>
                                     <td class="v-align-middle text-center">{{account_info.balance.total.BTC}}</td>                                    
                                     <td class="v-align-middle text-right">
-                                        <button class="btn btn-success btn-cons btn-buy" type="button">
+                                        <button class="btn btn-success btn-cons btn-buy" type="button" ui-sref="app.buybtc">
                                             <i class="fa fa-arrow-down"></i><span class="bold">&nbspBuy</span>
                                         </button>
-                                        <button class="btn btn-danger btn-cons btn-sell" type="button">
+                                        <button class="btn btn-danger btn-cons btn-sell" type="button" ui-sref="app.sellbtcnew">
                                             <i class="fa fa-arrow-up"></i><span class="bold">&nbspSell</span>
                                         </button>                                        
                                     </td>                                    
                                 </tr>
-                                <tr>
+                                <tr class="{{ (t_option == 'AUD') ? 'highlight': '' }}" ng-click="t_option = 'AUD'; transaction_type_change()">
                                     <td class="v-align-middle semi-bold">Primary AUD</td>
                                     <td class="v-align-middle text-center">AUD</td>
-                                    <td class="v-align-middle text-center">${{toPriceString(account_info.balance.available.AUD)}}</td>
-                                    <td class="v-align-middle text-center">${{toPriceString(account_info.balance.total.AUD)}}</td>
-                                    <td class="v-align-middle text-right"></td>
+                                    <td class="v-align-middle text-center">${{toPriceStringRound2(account_info.balance.available.AUD)}}</td>
+                                    <td class="v-align-middle text-center">${{toPriceStringRound2(account_info.balance.total.AUD)}}</td>
+                                    <td class="v-align-middle text-right">       
+                                    </td>                                    
                                 </tr>
                                 <tr class="tr-total bold">
                                     <td class="v-align-middle">Total Equity</td>
                                     <td class="v-align-middle text-center"></td>
-                                    <td class="v-align-middle text-center">${{toPriceString(account_info.enquity.available)}}</td>
-                                    <td class="v-align-middle text-center">${{toPriceString(account_info.enquity.total)}}</td>
+                                    <td class="v-align-middle text-center">${{toPriceStringRound2(account_info.enquity.available)}}</td>
+                                    <td class="v-align-middle text-center">${{toPriceStringRound2(account_info.enquity.total)}}</td>
                                     <td class="v-align-middle text-right"></td>
                                 </tr>
                             </tbody>
@@ -69,13 +70,17 @@
                 <div class="panel-heading m-b-20">
                     <div class="panel-title">Transactions</div>
                     <div class="drop-bitcoin">
-                        <select class="cs-select cs-skin-slide" cs-select ng-model="t_option" ng-change="SelectOption()">
-                            <option value="AUD">AUD</option>
-                            <option value="BTX">BTX</option>
+                        <select class="dropdown-item" ng-model="t_option" ng-change="transaction_type_change()">
+                            <option value="AUD" ng-selected="t_option == 'AUD'">AUD</option>
+                            <option value="BTX" ng-selected="t_option == 'BTX'">BTC</option>
                         </select>
                         <button class="btn btn-complete btn-cons btn-export" type="button">
-                            <i class="fa fa-share"></i><span class="bold">&nbspExport</span>
-                        </button>                          
+                            <i class="fa fa-share"></i><span class="bold">&nbspExport</span>   
+                        </button>
+                        <div class="export-buttons">
+                            <i class="fa fa-file-pdf-o" ng-click="export2pdf()"></i>
+                            <i class="fa fa-file-excel-o" ng-click="export2excel()"></i>
+                        </div>              
                     </div>
                     <div class="tools">
                         <a class="collapse" href="javascript:;"></a>
@@ -86,11 +91,26 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table ng-table="usersTable" class="table table-hover table-condensed table-striped" id="condensedTable" ui-options="table_options">
+                        <table ng-table="usersTable" class="table table-hover table-striped" id="overview-transaction-table" ui-options="table_options">
                             <thead>
                                 <tr>
-                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="width: 160px">Date</th>
-                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 95px">Status</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" style="width: 160px">Date</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 120px">
+                                        <div class="dropdown address-book-list">
+                                            <span class="" type="button" data-toggle="dropdown"> Status <span ng-if="t_option == 'AUD'" class="caret"></span></span>
+                                            <ul class="dropdown-menu" ng-if="t_option == 'AUD'">
+                                                <li>
+                                                    <span ng-click="filterWithStatus(0);">All</span>
+                                                </li>
+                                                <li>
+                                                    <span ng-click="filterWithStatus(1);">Processed</span>
+                                                </li>
+                                                <li>
+                                                    <span ng-click="filterWithStatus(2);">Pending</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th>
                                     <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 300px">Details</th>
                                     <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money in</th>
                                     <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money out</th>
@@ -102,10 +122,56 @@
                                     <td class="v-align-middle semi-bold">{{toDateReadable(item.created)}}</td>
                                     <td class="v-align-middle text-center" ng-mouseover="isplaceholder='display: block;'" ng-mouseout="isplaceholder='display: none;'"><i class="transaction-status" style="{{isplaceholder}}">{{item.status}}</i><img placeholder src="assets/img/{{item.status=='Processed' ? 'Processed' : 'Pending'}}.png"/></td>
                                     <td class="v-align-middle text-center">{{ item.details}}</td>
-                                    <td class="v-align-middle text-center">{{ item.money_in ? "$" : ""}}{{toPriceString(item.money_in)}}</td>
-                                    <td class="v-align-middle text-center">{{ item.money_out ? "$" : ""}}{{toPriceString(item.money_out)}}</td>                                    
-                                    <td class="v-align-middle text-right p-r-60">{{ audWalletTransaction[item.id][item.type] ? "$" : ""}}{{toPriceString(audWalletTransaction[item.id][item.type])}}</td>                                    
+                                    <td class="v-align-middle text-center">{{ item.money_in && t_option == "AUD" ? "$" : ""}}{{toPriceString(item.money_in)}}</td>
+                                    <td class="v-align-middle text-center">{{ item.money_out && t_option == "AUD"  ? "$" : ""}}{{toPriceString(item.money_out)}}</td>                                    
+                                    <td class="v-align-middle text-right p-r-60">{{ audWalletTransaction[item.id][item.type] && t_option == "AUD" ? "$" : ""}}{{toPriceString(audWalletTransaction[item.id][item.type])}}</td>                             
 
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-hover table-striped" id="overview-transaction-table-excel" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left" style="width: 160px">Date</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 95px">Status</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 300px">Details</th>
+                                    <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money in</th>
+                                    <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money out</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right p-r-60" style="width: 170px">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in transactions track by $index">
+                                    <td class="v-align-middle semi-bold">{{toDateReadable(item.created)}}</td>
+                                    <td class="v-align-middle text-center" ng-mouseover="isplaceholder='display: block;'" ng-mouseout="isplaceholder='display: none;'"><i class="transaction-status" style="{{isplaceholder}}">{{item.status}}</i></td>
+                                    <td class="v-align-middle text-center">{{ item.details}}</td>
+                                    <td class="v-align-middle text-center">{{ item.money_in  && t_option == "AUD" ? "$" : ""}}{{toPriceString(item.money_in)}}</td>
+                                    <td class="v-align-middle text-center">{{ item.money_out  && t_option == "AUD" ? "$" : ""}}{{toPriceString(item.money_out)}}</td>                                    
+                                    <td class="v-align-middle text-right p-r-60">{{ audWalletTransaction[item.id][item.type] && t_option == "AUD" ? "$" : ""}}{{toPriceString(audWalletTransaction[item.id][item.type])}}</td>                            
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-hover table-striped" id="overview-transaction-table-pdf" ui-options="table_options">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="width: 160px">Date</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 95px">Status</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 300px">Details</th>
+                                    <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money in</th>
+                                    <th class="col-xs-3 col-sm-2 col-md-2 col-lg-2 text-center" style="width: 170px">Money out</th>
+                                    <th class="col-xs-2 col-sm-2 col-md-2 col-lg-2 text-right p-r-60" style="width: 170px">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in transactions track by $index">
+                                    <td class="v-align-middle semi-bold">{{toDateReadable(item.created)}}</td>
+                                    <td class="v-align-middle text-center" ng-mouseover="isplaceholder='display: block;'" ng-mouseout="isplaceholder='display: none;'"><img placeholder src="assets/img/{{item.status=='Processed' ? 'Processed' : 'Pending'}}.png"/></td>
+                                    <td class="v-align-middle text-center">{{ item.details}}</td>
+                                    <td class="v-align-middle text-center">{{ item.money_in  && t_option == "AUD" ? "$" : ""}}{{toPriceString(item.money_in)}}</td>
+                                    <td class="v-align-middle text-center">{{ item.money_out && t_option == "AUD"  ? "$" : ""}}{{toPriceString(item.money_out)}}</td>                                    
+                                    <td class="v-align-middle text-right p-r-60">{{ audWalletTransaction[item.id][item.type] && t_option == "AUD" ? "$" : ""}}{{toPriceString(audWalletTransaction[item.id][item.type])}}</td>                             
                                 </tr>
                             </tbody>
                         </table>
