@@ -13,7 +13,8 @@ angular.module('app', ['ngTable'])
     	function($scope, $timeout, $http, public_apis, private_apis, NgTableParams) {
     		private_apis.GetBalance(function (data) {
     			if (data) {
-    				$scope.available_balance_aud = data.available.AUD;
+    				$scope.available_balance_aud = data.total.AUD;
+                    
     			}
     		});
 

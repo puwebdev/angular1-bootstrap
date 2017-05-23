@@ -5,7 +5,7 @@
       <!-- BEGIN SIDEBAR HEADER -->
       <div class="sidebar-header">
         <img src="assets/img/logo.png" alt="logo" class="brand" data-src="assets/img/logo.png" data-src-retina="assets/img/logo.png" width="122" height="32">
-        <div class="sidebar-header-controls">
+        <div class="sidebar-header-controls hidden">
           <!-- <button data-pages-toggle="#appMenu" class="btn btn-xs sidebar-slide-toggle btn-link btn-collapse m-t-4" type="button"><i class="fa fa-angle-down fs-16"></i> -->
           </button>
           <button data-toggle-pin="sidebar" class="btn btn-link visible-lg-inline btn-collapse" type="button"><i class="fa fs-13"></i>
@@ -16,6 +16,86 @@
       <!-- BEGIN SIDEBAR MENU -->
       <div class="sidebar-menu">
         <ul class="menu-items">
+          <li class=" m-t-50">
+            <span class="group-title">Accounts</span>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.dashboard" class="detailed">
+                <span class="title">Accounts Overview</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.transferbtc">
+                <span class="title">Transfer BTC</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.addressbook">
+                <span class="title">Address Book</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.pageone">
+                <span class="title">Deposit AUD</span>
+              </a>
+            </ul>
+            <ul class="p-l-22 m-b-20" ui-sref-active="active">
+              <a ui-sref="app.withdrawaud">
+                <span class="title">Withdraw AUD</span>
+              </a>
+            </ul>
+          </li>
+          <li class=" m-t-10">
+            <span class="group-title">Trade</span>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.tradedetail">
+                <span class="title">Trade Details</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.orderbook">
+                <span class="title">Order Book</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.buybtc">
+                <span class="title">Buy BTC</span>
+              </a>
+            </ul>
+            <ul class="p-l-22 m-b-20" ui-sref-active="active">
+              <a ui-sref="app.sellbtcnew">
+                <span class="title">Sell BTC</span>
+              </a>
+            </ul>
+          </li>
+          <li class="ul-collapsed m-t-10">
+            <span class="group-title">Profile</span>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.accountsetting">
+                <span class="title">Account Settings</span>
+              </a>
+            </ul>
+            <ul class="p-l-22 m-b-20" ui-sref-active="active">
+              <a ui-sref="app.security">
+                <span class="title">Security</span>
+              </a>
+            </ul>
+          </li>
+          <li class="ul-collapsed m-t-10">
+            <span class="group-title">Support</span>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.accountsetting">
+                <span class="title">Contact</span>
+              </a>
+            </ul>
+            <ul class="p-l-22" ui-sref-active="active">
+              <a ui-sref="app.security">
+                <span class="title">Support</span>
+              </a>
+            </ul>
+          </li>
+
+<!-- 
+
           <li class="m-t-30 p-l-22" ui-sref-active="active">
             <a ui-sref="app.dashboard" class="detailed">
               <span class="title1">Accounts Overview</span>
@@ -76,104 +156,7 @@
               <span class="title">Address Book</span>
             </a>
             <span class="icon-thumbnail "><i class="fs-14 pg-calender"></i></span>
-          </li>
-<!--           <li class="p-l-22">
-            <a href="javascript:;">
-              <span class="title">Accounts</span>
-              <span class=" arrow"></span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-home"></i></span>
-            <ul class="sub-menu">
-              <li ui-sref-active="active">
-                <a ui-sref="app.accounts.summary">Summary</a>
-                <span class="icon-thumbnail">sm</span>
-              </li>
-              <li ui-sref-active="active">
-                <a ui-sref="app.accounts.transactions">Transactions</a>
-                <span class="icon-thumbnail">ts</span>
-              </li>
-              <li ui-sref="app.accounts.deposit">
-                <a ui-sref="app.accounts.deposit">Deposit</a>
-                <span class="icon-thumbnail">dp</span>
-              </li>
-              <li ui-sref-active="active">
-                <a ui-sref="app.accounts.transfer">Funds Transfer</a>
-                <span class="icon-thumbnail">ft</span>
-              </li>
-              <li class="">
-                <a href="#">Payee List</a>
-                <span class="icon-thumbnail">pl</span>
-              </li>
-
-            </ul>
-          </li>
-          <li class="p-l-22">
-            <a href="javascript:;">
-              <span class="title">Trades</span>
-              <span class=" arrow"></span>
-            </a>
-            <span class="icon-thumbnail"><i class="fs-14 fa fa-trademark"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="#">Instant Buy/Sell</a>
-                <span class="icon-thumbnail">it</span>
-              </li>
-              <li class="">
-                <a href="#">Limit Order</a>
-                <span class="icon-thumbnail">lo</span>
-              </li>
-              <li class="">
-                <a href="#">Order Book</a>
-                <span class="icon-thumbnail">ob</span>
-              </li>
-              <li class="">
-                <a href="#">Open Orders</a>
-                <span class="icon-thumbnail">oo</span>
-              </li>
-              <li class="">
-                <a href="#">Trades History</a>
-                <span class="icon-thumbnail">th</span>
-              </li>
-            </ul>
-          </li>  
-          <li class="p-l-22">
-            <a href="javascript:;">
-              <span class="title">Services</span>
-              <span class=" arrow"></span>
-            </a>
-            <span class="icon-thumbnail"><i class="fs-14 fa fa-bolt"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="#">Get Verified</a>
-                <span class="icon-thumbnail">gv</span>
-              </li>
-              <li class="">
-                <a href="#">Account Settings</a>
-                <span class="icon-thumbnail">as</span>
-              </li>
-              <li class="">
-                <a href="#">Security</a>
-                <span class="icon-thumbnail">sc</span>
-              </li>
-            </ul>
-          </li>
-          <li class="p-l-22">
-            <a href="javascript:;">
-              <span class="title">Support</span>
-              <span class=" arrow"></span>
-            </a>
-            <span class="icon-thumbnail"><i class="fs-14 fa fa-support"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="#">Contact</a>
-                <span class="icon-thumbnail">ct</span>
-              </li>
-              <li class="">
-                <a href="#">FAQ</a>
-                <span class="icon-thumbnail">fq</span>
-              </li>
-            </ul>
-          </li>   -->         
+          </li> -->    
         </ul>
         <div class="clearfix"></div>
       </div>
