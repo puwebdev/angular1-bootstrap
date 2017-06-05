@@ -92,7 +92,7 @@ angular.module('app', ['ngTable'])
 					return '0.00';
 				}
 			};
-
+			
 			$scope.toBTCFormatPriceString = function (price) {
 				price = parseFloat(price).toFixed(8);
 				if (price) {
